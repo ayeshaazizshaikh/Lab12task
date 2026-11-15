@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Quiz Mark Validator</title></head>
+<body>
+  <h1>Quiz Mark Validation</h1>
+  <label for="mark">Enter quiz mark:</label>
+  <input type="text" id="mark">
+  <button id="submit">Submit</button>
+  <p id="result"></p>
+  <script>
+    // Accept integers 0..10 inclusive, reject everything else.
+    function validateMark(value) {
+      const v = value.trim();
+      if (!/^-?\d+$/.test(v)) return false;
+      const n = parseInt(v, 10);
+      return n >= 0 && n <= 10;
+    }
+    document.getElementById("submit").addEventListener("click", function () {
+      const value = document.getElementById("mark").value;
+      const out = document.getElementById("result");
+      if (validateMark(value)) {
+        out.textContent = "Accepted";
+      } else {
+        // BASELINE message (Step 1 commit):
+        out.textContent = "Rejected: invalid mark";
+        // IMPROVED message (follow-up commit) - replace the line above with:
+        // out.textContent = "Rejected: mark must be an integer from 0 to 10";
+      }
+    });
+  </script>
+</body>
+</html>
